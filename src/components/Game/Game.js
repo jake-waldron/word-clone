@@ -11,9 +11,22 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
+	const [guesses, setGuesses] = React.useState([]);
+
+	function addGuess(guess) {
+		setGuesses((prevGuesses) => [...prevGuesses, guess]);
+	}
+
 	return (
 		<>
-			<GuessInput />
+			<ul className="guess-results">
+				{guesses.map((guess, index) => (
+					<li key={index} className="guess">
+						{guess}
+					</li>
+				))}
+			</ul>
+			<GuessInput addGuess={addGuess} />
 		</>
 	);
 }
